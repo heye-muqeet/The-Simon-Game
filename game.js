@@ -2,10 +2,9 @@
 ////////////////////////////// VARIABLES ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
-const buttonColor = ["green", "red", "yellow", "blue"];
-const gamePattern = [];
-const userClickedPattern = [];
-var randomNumber;
+var buttonColour = ["green", "red", "yellow", "blue"];
+var gamePattern = [];
+var userClickedPattern = [];
 var level = 0;
 var isStart = false;
 var check = 0;
@@ -28,8 +27,10 @@ function checkAnswer() {
     } else {
       gameOverAnimation();
       $("#level-title").text("Game Over, Press Any Key To Restart");
-      userClickedPattern.length = 0;
-      gamePattern.length = 0;
+      // userClickedPattern.length = 0;
+      userClickedPattern = [];
+      // gamePattern.length = 0;
+      gamePattern = [];
       level = 0;
       check = 0;
       isStart = false;
@@ -39,11 +40,11 @@ function checkAnswer() {
 
 function nextSequence() {
   level++;
-  $("h1").text("Level " + level);
-  randomNumber = Math.floor(Math.random() * 4);
-  var randomChoosenColor = buttonColor[randomNumber];
-  gamePattern.push(randomChoosenColor);
-  btnAnimation(randomChoosenColor);
+  $("#level-title").text("Level " + level);
+  var randomNumber = Math.floor(Math.random() * 4);
+  var randomChosenColour = buttonColour[randomNumber];
+  gamePattern.push(randomChosenColour);
+  btnAnimation(randomChosenColour);
 }
 
 function gameOverAnimation() {
@@ -68,9 +69,9 @@ function btnAnimation(key) {
 ////////////////////////////////////////////////////////////////////////////
 
 $(".btn").click(function () {
-  var userChosenColor = $(this).attr("id");
-  userClickedPattern.push(userChosenColor);
-  btnAnimation(userChosenColor);
+  var userChosenColour = $(this).attr("id");
+  userClickedPattern.push(userChosenColour);
+  btnAnimation(userChosenColour);
   checkAnswer();
 });
 
@@ -80,6 +81,6 @@ $(document).keypress(function () {
     $("#level-title").text("Level " + level);
     setTimeout(function () {
       nextSequence();
-    }, 1000);
+    }, 200);
   }
 });
